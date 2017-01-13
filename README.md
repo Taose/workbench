@@ -7,3 +7,6 @@
 
 ![Preview](http://i.imgur.com/Pqg3G92.png)
 ![Preview2](http://i.imgur.com/cCR4FJc.png)
+
+### Taose's Fork ###
+Decreased Hammer Wear and Increased Repair amount. 
