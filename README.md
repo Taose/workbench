@@ -4,6 +4,8 @@ but also two new (credit to kilbeth originating art) hammers of wood and bronze 
 
 Should be good for about five uses per hammer of an equivalent tool. 
 
+Additionally and perhaps more usefully, when nearing end of life, the tools can be "salvaged", this saves an ingot from the worn hammer for re-use. 
+
 
 ## Work Bench ##
 
