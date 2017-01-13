@@ -184,23 +184,26 @@ function workbench.timer(pos)
 
 	-- Changing how effective the hammer is depending on which one is 
 	-- 	in the workbench.
-	if hammer.get_name() == ":Taose_Work:wood_hammer" then
+	print("Entered repair zone")
+	if hammer:get_name() == "Taose_Work:wood_hammer" then
 		tool:add_wear(-6400)
-		hammer:add_wear(400)
-	elseif hammer.get_name() == ":Taose_Work:steel_hammer" then
-		tool:add_wear(-12800)
-		hammer:add_wear(200)
-	elseif hammer.get_name() == ":Taose_Work:bronze_hammer" then
-		tool:add_wear(-25600)
-		hammer:add_wear(100)
+		print("Repaired by 6400")
+		hammer:add_wear(1600)
+		print("Hammer worn by 1600")
+	elseif hammer:get_name() == "Taose_Work:steel_hammer" then
+		tool:add_wear(-8600)
+		print("Repaired by 8600")
+		hammer:add_wear(1200)
+		print("Hammer worn by 1200")
+	elseif hammer:get_name() == "Taose_Work:bronze_hammer" then
+		tool:add_wear(-10200)
+		print("Repaired by 10200")
+		hammer:add_wear(700)
+		print("Hammer worn by 700")
 	else
 		--do nothing--		
 	end
 		
-
-	
-	tool:add_wear(-12800)
-	hammer:add_wear(200)
 
 	inv:set_stack("tool", 1, tool)
 	inv:set_stack("hammer", 1, hammer)
@@ -212,9 +215,9 @@ function workbench.put(_, listname, _, stack)
 	if (listname == "tool" and stack:get_wear() > 0 and
 	    workbench:repairable(stackname)) or
 	   (listname == "input" and minetest.registered_nodes[stackname.."_cube"]) or
-	   (listname == "wood_hammer" and stackname == "Taose_Work:wood_hammer") or
-	   (listname == "steel_hammer" and stackname == "Taose_Work:steel_hammer") or 
-           (listname == "bronze_hammer" and stackname == "Taose_Work:bronze_hammer") or
+	   (listname == "hammer" and stackname == "Taose_Work:wood_hammer") or
+	   (listname == "hammer" and stackname == "Taose_Work:steel_hammer") or 
+           (listname == "hammer" and stackname == "Taose_Work:bronze_hammer") or
 	    listname == "storage" then
 		return stack:get_count()
 	end
@@ -241,9 +244,7 @@ function workbench.on_put(pos, listname, _, stack)
 		local input = inv:get_stack("input", 1)
 		workbench:get_output(inv, input, stack:get_name())
 	elseif listname == "tool" or 
-		listname == "wood_hammer" or
-		listname == "steel_hammer" or
-		listname == "bronze_hammer" then
+		listname == "hammer" then
 		local timer = minetest.get_node_timer(pos)
 		timer:start(3.0)
 	end
@@ -266,6 +267,10 @@ function workbench.on_take(pos, listname, index, stack)
 	end
 end
 
+
+-- Creating the objects necessary to repair items.
+
+-- The work bench where the work is carried out. 
 minetest.register_node(":Taose_Work:workbench", {
 	description = "Work Bench",
 	paramtype = "light",
@@ -337,6 +342,15 @@ minetest.register_craft({
 	recipe = {
 		{"default:bronze_ingot", "group:stick", "default:bronze_ingot"},
 		{"", "group:stick", ""}
+	}
+})
+
+--Salvage bronze hammer
+minetest.register_craft({
+	type = "cooking",
+	output = "default:bronze_ingot", 
+	recipe = {
+			{"Taose_Work:bronze_hammer"}
 	}
 })
 
