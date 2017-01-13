@@ -180,9 +180,26 @@ function workbench.timer(pos)
 	if tool:is_empty() or hammer:is_empty() or tool:get_wear() == 0 then
 		timer:stop() return
 	end
-
 	-- Tool's wearing range: 0-65535 | 0 = new condition.
-	tool:add_wear(-800)
+
+	-- Changing how effective the hammer is depending on which one is 
+	-- 	in the workbench.
+	if hammer.get_name() == ":Taose_Work:wood_hammer" then
+		tool:add_wear(-6400)
+		hammer:add_wear(400)
+	elseif hammer.get_name() == ":Taose_Work:steel_hammer" then
+		tool:add_wear(-12800)
+		hammer:add_wear(200)
+	elseif hammer.get_name() == ":Taose_Work:bronze_hammer" then
+		tool:add_wear(-25600)
+		hammer:add_wear(100)
+	else
+		--do nothing--		
+	end
+		
+
+	
+	tool:add_wear(-12800)
 	hammer:add_wear(200)
 
 	inv:set_stack("tool", 1, tool)
@@ -195,7 +212,9 @@ function workbench.put(_, listname, _, stack)
 	if (listname == "tool" and stack:get_wear() > 0 and
 	    workbench:repairable(stackname)) or
 	   (listname == "input" and minetest.registered_nodes[stackname.."_cube"]) or
-	   (listname == "hammer" and stackname == "xdecor:hammer") or
+	   (listname == "wood_hammer" and stackname == "Taose_Work:wood_hammer") or
+	   (listname == "steel_hammer" and stackname == "Taose_Work:steel_hammer") or 
+           (listname == "bronze_hammer" and stackname == "Taose_Work:bronze_hammer") or
 	    listname == "storage" then
 		return stack:get_count()
 	end
@@ -221,7 +240,10 @@ function workbench.on_put(pos, listname, _, stack)
 	if listname == "input" then
 		local input = inv:get_stack("input", 1)
 		workbench:get_output(inv, input, stack:get_name())
-	elseif listname == "tool" or listname == "hammer" then
+	elseif listname == "tool" or 
+		listname == "wood_hammer" or
+		listname == "steel_hammer" or
+		listname == "bronze_hammer" then
 		local timer = minetest.get_node_timer(pos)
 		timer:start(3.0)
 	end
@@ -244,7 +266,7 @@ function workbench.on_take(pos, listname, index, stack)
 	end
 end
 
-minetest.register_node(":xdecor:workbench", {
+minetest.register_node(":Taose_Work:workbench", {
 	description = "Work Bench",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -265,15 +287,29 @@ minetest.register_node(":xdecor:workbench", {
 	allow_metadata_inventory_move = workbench.move
 })
 
-minetest.register_tool(":xdecor:hammer", {
-	description = "Hammer",
-	inventory_image = "xdecor_hammer.png",
-	wield_image = "xdecor_hammer.png",
+minetest.register_tool(":Taose_Work:steel_hammer", {
+	description = "Steel Hammer",
+	inventory_image = "steel_hammer.png",
+	wield_image = "steel_hammer.png",
+	on_use = function() do return end end
+})
+
+minetest.register_tool(":Taose_Work:wood_hammer", {
+	description = "Wood Hammer", 
+	inventory_image = "wood_hammer.png",
+	wield_image = "wood_hammer.png",
+	on_use = function() do return end end 
+})
+
+minetest.register_tool(":Taose_Work:bronze_hammer", {
+	description = "Bronze Hammer", 
+	inventory_image = "bronze_hammer.png", 
+	wield_image = "bronze_hammer.png", 
 	on_use = function() do return end end
 })
 
 minetest.register_craft({
-	output = "xdecor:workbench",
+	output = "Taose_Work:workbench",
 	recipe = {
 		{"group:wood", "group:wood"},
 		{"group:wood", "group:wood"}
@@ -281,9 +317,25 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "xdecor:hammer",
+	output = "Taose_Work:wood_hammer",
+	recipe = {
+		{"group:wood", "group:stick", "group:wood"},
+		{"", "group:stick", ""}
+	}
+})
+
+minetest.register_craft({
+	output = "Taose_Work:steel_hammer",
 	recipe = {
 		{"default:steel_ingot", "group:stick", "default:steel_ingot"},
+		{"", "group:stick", ""}
+	}
+})
+
+minetest.register_craft({
+	output = "Taose_Work:bronze_hammer",
+	recipe = {
+		{"default:bronze_ingot", "group:stick", "default:bronze_ingot"},
 		{"", "group:stick", ""}
 	}
 })
@@ -336,4 +388,3 @@ for i=1, #nodes do
 	end
 end
 end
-
