@@ -337,6 +337,13 @@ minetest.register_craft({
 	}
 })
 
+-- Salvage steel hammer
+minetest.register_craft({
+	type = "cooking",
+	output = "default:steel_ingot",
+	recipe = "Taose_Work:steel_hammer
+})
+
 minetest.register_craft({
 	output = "Taose_Work:bronze_hammer",
 	recipe = {
@@ -349,9 +356,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	output = "default:bronze_ingot", 
-	recipe = {
-			{"Taose_Work:bronze_hammer"}
-	}
+	recipe = "Taose_Work:bronze_hammer"
 })
 
 for _, d in pairs(workbench.defs) do
