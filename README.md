@@ -6,10 +6,10 @@ Should be good for about five uses per hammer of an equivalent tool.
 
 Additionally and perhaps more usefully, when nearing end of life, the hammers can be "salvaged", this saves an ingot from the worn hammer for re-use. 
 
-v0.1 
-    Added Salvaging features to hammers so that they aren't entirely wasted. 
-    Added additional hammers of varying strengths to work well with the "levelling" system
-    Adjusted the rates of wear and repair to be more friendly to gameplay. 
+v0.1 <br /> 
+-  Added Salvaging features to hammers so that they aren't entirely wasted. 
+-  Added additional hammers of varying strengths to work well with the "levelling" system
+-  Adjusted the rates of wear and repair to be more friendly to gameplay. 
 
 
 ## Work Bench ##
