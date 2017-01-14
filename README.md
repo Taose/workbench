@@ -11,15 +11,10 @@ v0.1 <br />
 -  Added additional hammers of varying strengths to work well with the "levelling" system
 -  Adjusted the rates of wear and repair to be more friendly to gameplay. 
 
+v0.0 <br />
+- This Work Bench can cut up to 12 shapes, repair your tools and store items. 
+- Forked from [X-Decor | Workbench] (https://github.com/minetest-mods/workbench)
 
-## Work Bench ##
-
-##### A mod adding a Work Bench to Minetest. #####
-##### The Work Bench can cut up to 12 shapes, repair your tools, craft items and store. #####
-
-##### This mod is originating from [X-Decor](https://github.com/kilbith/xdecor). #####
-
-![Preview](http://i.imgur.com/Pqg3G92.png)
-![Preview2](http://i.imgur.com/cCR4FJc.png)
+![Preview](http://imgur.com/V5Cp1ju.png)
 
 
