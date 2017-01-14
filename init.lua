@@ -348,7 +348,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	output = "default:steel_ingot",
-	recipe = "Taose_Work:steel_hammer
+	recipe = "Taose_Work:steel_hammer"
 })
 
 minetest.register_craft({
