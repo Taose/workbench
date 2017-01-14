@@ -1,3 +1,13 @@
+----
+--	Taose's Mod v0.1
+--	
+--	Description: Originally derived from the x-decor mod workbench, this 
+--			mod has been tweaked for more mods and better testing.
+--	
+--	Contents (use the Find function typically ctrl+f)
+--		Entities 		Ent01
+----
+
 local workbench = {}
 screwdriver = screwdriver or {}
 local min, ceil = math.min, math.ceil
@@ -68,7 +78,13 @@ workbench.defs = {
 
 -- Tools allowed to be repaired.
 function workbench:repairable(stack)
-	local tools = {"pick", "axe", "shovel", "sword", "hoe", "armor", "shield"}
+	local tools = { "pick", 
+			"axe", 
+			"shovel", 
+			"sword", 
+			"hoe", 
+			"armor", 
+			"shield"}
 	for _, t in pairs(tools) do
 		if stack:find(t) then return true end
 	end
@@ -114,8 +130,7 @@ local formspecs = {
 	   label[0.9,2.23;Repair]
 	   box[-0.05,1;2.05,0.9;#555555]
 	   box[-0.05,2;2.05,0.9;#555555]
-	   button[0,0;2,1;craft;Crafting]
-	   button[2,0;2,1;storage;Storage]
+	   button[0,0;2,1;storage;Storage]
 	   image[3,1;1,1;gui_furnace_arrow_bg.png^[transformR270]
 	   image[0,1;1,1;workbench_saw.png]
 	   image[0,2;1,1;workbench_anvil.png]
@@ -124,13 +139,6 @@ local formspecs = {
 	   list[context;tool;2,2;1,1;]
 	   list[context;hammer;3,2;1,1;]
 	   list[context;forms;4,0;4,3;] ]],
-	-- Crafting formspec.
-	[[ image[5,1;1,1;gui_furnace_arrow_bg.png^[transformR270]
-	   button[0,0;1.5,1;back;< Back]
-	   list[current_player;craft;2,0;3,3;]
-	   list[current_player;craftpreview;6,1;1,1;]
-	   listring[current_player;main]
-	   listring[current_player;craft] ]],
 	-- Storage formspec.
 	[[ list[context;storage;0,1;8,2;]
 	   button[0,0;1.5,1;back;< Back]
@@ -161,8 +169,7 @@ end
 function workbench.fields(pos, _, fields)
 	local meta = minetest.get_meta(pos)
 	if     fields.back    then workbench:set_formspec(meta, 1)
-	elseif fields.craft   then workbench:set_formspec(meta, 2)
-	elseif fields.storage then workbench:set_formspec(meta, 3) end
+	elseif fields.storage then workbench:set_formspec(meta, 2) end
 end
 
 function workbench.dig(pos)
@@ -227,7 +234,9 @@ end
 function workbench.take(_, listname, _, stack, player)
 	if listname == "forms" then
 		local inv = player:get_inventory()
-		if inv:room_for_item("main", stack:get_name()) then return -1 end
+		if inv:room_for_item("main", stack:get_name()) then 
+			return -1 
+		end
 		return 0
 	end
 	return stack:get_count()
@@ -267,7 +276,7 @@ function workbench.on_take(pos, listname, index, stack)
 	end
 end
 
-
+-- Ent01 Entities and the registration of. 
 -- Creating the objects necessary to repair items.
 
 -- The work bench where the work is carried out. 
