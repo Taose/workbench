@@ -337,6 +337,13 @@ minetest.register_craft({
 	}
 })
 
+-- Salvage wooden hammer
+minetest.register_craft({
+	type = "cooking", 
+	output = "default:torch",
+	recipe = "Taose_Word:wood_hammer"
+})
+
 -- Salvage steel hammer
 minetest.register_craft({
 	type = "cooking",
